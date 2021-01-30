@@ -13,3 +13,8 @@ This was built with `WebRTC`, a `golang` signaling backend using `websockets` an
 - [Dina Khalesi](https://github.com/dkhalesi)
 - [Alex Stathis](https://github.com/al3xstathis)
 - [Nicolas MacBeth](https://github.com/Nicolas-MacBeth)
+
+### Running locally
+
+- Frontend: `cd frontend` && `npm i` && `npm start`
+- Backend: `cd backend` && `go build main.go` && `./main.exe` (or `./main` for MacOS/Linux)
