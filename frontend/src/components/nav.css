@@ -1,0 +1,20 @@
+.navbar {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-buttons {
+    font-size: 24px;
+    margin-right: 50px;
+    color: var(--red-ish);
+}
+
+.nav-link {
+    text-decoration: none;
+    margin: 20px 20px 20px 50px;
+    font-size: 30px;
+    color: var(--red-ish);
+}

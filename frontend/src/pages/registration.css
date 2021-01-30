@@ -1,0 +1,114 @@
+.registration-container {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.sign-up-in, .info {
+    height: 70vh;
+    width: 33%;
+    min-width: 400px;
+    border-radius: 20px;
+    margin: 50px;
+}
+
+.title-sign-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.81);
+    /*margin-top: 15px;*/
+    margin: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+}
+
+.title-h3 {
+    margin: 5px;
+    font-size: 2vw;
+}
+
+.sign-up-in {
+    display: grid;
+    grid-template-rows: 15% repeat(4, 10%) 30% 15%;
+    align-items: center;
+    background-color: var(--blue-ish);
+}
+
+.info {
+    display: grid;
+    grid-template-rows: 15% 85%;
+    align-items: center;
+    background-color: var(--red-ish);
+}
+.reg-input {
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    width: 50%;
+}
+
+.username, .name, .password, .email {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.input-description {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.mental-health-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.long-part {
+    max-width: 70%;
+    text-align: center;
+    line-height: 1.1rem;
+}
+
+.mental-select {
+    width: 70%;
+    max-height: 100px;
+}
+
+.sign-up-submit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.sign-up-button {
+    margin: 20px;
+    min-width: 30%;
+    height: 50%;
+    background-color: white;
+    border-radius: 20px;
+    font-size: 30px;
+}
+
+.description-box {
+    justify-self: center;
+    height: 85%;
+    width: 80%;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.81);
+    padding: 15px;
+}
+
+.description-p {
+    margin: 0;
+}
