@@ -3,7 +3,7 @@
     height: 90vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -11,8 +11,10 @@
     height: 70vh;
     width: 33%;
     min-width: 400px;
+    max-width: 550px;
     border-radius: 20px;
     margin: 50px;
+    min-height: 500px;
 }
 
 .title-sign-up {
@@ -29,12 +31,12 @@
 
 .title-h3 {
     margin: 5px;
-    font-size: 2vw;
+    font-size: 30px;
 }
 
 .sign-up-in {
     display: grid;
-    grid-template-rows: 15% repeat(4, 10%) 30% 15%;
+    grid-template-rows: 15% repeat(4, 10%) 20% 15%;
     align-items: center;
     background-color: var(--blue-ish);
 }
@@ -76,7 +78,7 @@
 .long-part {
     max-width: 70%;
     text-align: center;
-    line-height: 1.1rem;
+    line-height: 1.2rem;
 }
 
 .mental-select {
@@ -97,7 +99,7 @@
     height: 50%;
     background-color: white;
     border-radius: 20px;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .description-box {
@@ -111,4 +113,44 @@
 
 .description-p {
     margin: 0;
+}
+
+.change-sign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-sign p {
+    font-size: 13px;
+}
+
+
+.change-sign-button  {
+    height: 25px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 1440px) {
+    .title-h3 {
+        font-size: 24px;
+    }
+
+
+}
+
+@media only screen and (max-width: 450px) {
+    .title-h3 {
+        font-size: 18px;
+    }
+    .sign-up-in, .info {
+        margin: 15px;
+        width: 100%;
+        min-width: initial;
+    }
+    .registration-container {
+        width: 100vw;
+        height: auto;
+    }
 }

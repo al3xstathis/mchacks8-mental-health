@@ -3,7 +3,8 @@
 :root {
   --red-ish: rgba(251, 155, 155, 0.9);
   --light-red-ish: rgba(251, 155, 155, 0.4);
-  --blue-ish: #BEFBFF;
+  --light-light-red-ish: rgba(251, 155, 155, 0.1);
+  --blue-ish: rgba(190, 251, 255, 0.6);
 }
 
 
@@ -14,6 +15,14 @@
   font-family: Saira, serif;
 }
 
+:root {
+  background-color: var(--light-light-red-ish);
+}
+
 button {
   border: none;
+}
+
+input:focus, button:focus {
+  outline: none;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import './video-chat.css';
 import Navbar from "../components/nav";
 import Chat from "../components/chat";
+import {motion} from 'framer-motion'
 
 const Video = () => {
     return (
@@ -9,12 +10,20 @@ const Video = () => {
             <Navbar/>
             <div className="video-chat">
                 <div className="video-feed">
-                    <div className="incoming-vid">
+                    <motion.div
+                        initial={{opacity: 0,x: -100}}
+                        animate={{opacity: 1,x: 0}}
+                        transition={{duration:0.5}}
+                        className="incoming-vid">
 
-                    </div>
-                    <div className="selfie-vid">
+                    </motion.div>
+                    <motion.div
+                        initial={{opacity: 0,x: 100}}
+                        animate={{opacity: 1,x: 0}}
+                        transition={{duration:0.5}}
+                        className="selfie-vid">
 
-                    </div>
+                    </motion.div>
                 </div>
                 <div className="chat-game-feed">
                     <Chat/>
