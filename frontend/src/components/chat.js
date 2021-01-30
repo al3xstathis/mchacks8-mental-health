@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './chat.css';
 
 const Chat = () => {
@@ -15,21 +15,41 @@ const Chat = () => {
             }
         ]
     );
+
+    const bottomRef = useRef();
+
+    const scrollToBottom = () => {
+        bottomRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    };
+
     const handleSubmit = e => {
         e.preventDefault();
         const typedText = typingText.toString()
 
-        setChatArray(
-            chatArray.concat({
-                message: typedText,
-                incoming: false
-            }));
+        if(typedText!=="") {
+            setChatArray(
+                chatArray.concat({
+                    message: typedText,
+                    incoming: false
+                }));
 
-        setTypingText("");
-
-
-        console.log("Message sent");
+            setTypingText("");
+            scrollToBottom();
+        }
     };
+
+    const listOfMessages = chatArray.map((message, index) =>
+        <div key={index} className={message.incoming ? "chat-item-flex-left" : "chat-item-flex-right"}>
+            {/*Todo replace with actual sender and receiver usernames**/}
+            <p className="sender-receiver">{message.incoming ? "Incoming" : "Outgoing"}</p>
+            <div className={message.incoming ? "chat-incoming" : "chat-outgoing"}>
+                {message.message}
+            </div>
+        </div>
+    )
 
 
     return (
@@ -37,7 +57,10 @@ const Chat = () => {
             <div className="chat-container">
                 <div className="chat-inner">
                     <div className="chat-feed">
-                        <ChatFeed chatArray={chatArray}/>
+                        <div className="list-container">
+                            {listOfMessages}
+                            <div ref={bottomRef}></div>
+                        </div>
                     </div>
                     <form
                         onSubmit={handleSubmit}
@@ -59,6 +82,14 @@ const Chat = () => {
 }
 const ChatFeed = (props) => {
     const messages = props.chatArray;
+    const bottomRef = useRef();
+
+    const scrollToBottom = () => {
+        bottomRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    };
     const listOfMessages = messages.map((message, index) =>
         <div key={index} className={message.incoming ? "chat-item-flex-left" : "chat-item-flex-right"}>
             {/*Todo replace with actual sender and receiver usernames**/}
@@ -71,6 +102,7 @@ const ChatFeed = (props) => {
     return (
         <div className="list-container">
             {listOfMessages}
+            <div ref={bottomRef}></div>
         </div>
     )
 }

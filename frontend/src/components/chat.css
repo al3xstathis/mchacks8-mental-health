@@ -119,4 +119,10 @@ ul, li {
 .list-container {
     box-sizing: border-box;
     padding: -5px;
+    overflow-y: auto;
+}
+
+#chat:last-child {
+    position: sticky;
+    bottom: 0;
 }
