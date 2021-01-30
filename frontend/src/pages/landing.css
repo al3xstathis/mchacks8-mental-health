@@ -1,4 +1,44 @@
 .landing-container {
     height: 90vh;
     width: 100%;
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.image-container {
+    width: 35%;
+    padding-bottom: 5rem;
+}
+
+.landing-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 90vh;
+}
+
+.landing-text-h2 {
+    text-align: center;
+}
+
+.call-to-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.call-to-action-h4 {
+    margin: 0;
+    opacity: 80%;
+}
+
+.link-to-sign-up {
+    font-size: 20px;
+    text-decoration: none;
+    color: #420101;
+    padding: 20px;
+    background-color: var(--light-red-ish);
+    border-radius: 20px;
 }

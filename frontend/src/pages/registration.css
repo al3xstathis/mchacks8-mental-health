@@ -3,7 +3,7 @@
     height: 90vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -11,6 +11,7 @@
     height: 70vh;
     width: 33%;
     min-width: 400px;
+    max-width: 550px;
     border-radius: 20px;
     margin: 50px;
 }
@@ -29,7 +30,7 @@
 
 .title-h3 {
     margin: 5px;
-    font-size: 2vw;
+    font-size: 30px;
 }
 
 .sign-up-in {
@@ -97,7 +98,7 @@
     height: 50%;
     background-color: white;
     border-radius: 20px;
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .description-box {
@@ -111,4 +112,27 @@
 
 .description-p {
     margin: 0;
+}
+
+@media only screen and (max-width: 1440px) {
+    .title-h3 {
+        font-size: 24px;
+    }
+
+
+}
+
+@media only screen and (max-width: 450px) {
+    .title-h3 {
+        font-size: 18px;
+    }
+    .sign-up-in, .info {
+        margin: 15px;
+        width: 100%;
+        min-width: initial;
+    }
+    .registration-container {
+        width: 100vw;
+        height: auto;
+    }
 }

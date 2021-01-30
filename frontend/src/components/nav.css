@@ -8,13 +8,34 @@
 
 .nav-buttons {
     font-size: 24px;
+
     margin-right: 50px;
     color: var(--red-ish);
 }
+
+
 
 .nav-link {
     text-decoration: none;
     margin: 20px 20px 20px 50px;
     font-size: 30px;
     color: var(--red-ish);
+}
+
+@media only screen and (max-width: 450px) {
+    .nav-link {
+        font-size: 16px;
+    }
+    .nav-buttons {
+        font-size: 20px;
+        width: 25px;
+    }
+    .navbar {
+
+    }
+    .nav-buttons-container {
+        width: 100px;
+        display: flex;
+        justify-content: space-around;
+    }
 }
