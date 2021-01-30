@@ -9,7 +9,7 @@ const Navbar = () => {
                 <div className="nav-title">
                     <Link className="nav-link" to={'/'}>Mental Health Chat</Link>
                 </div>
-                <div>
+                <div className="nav-buttons-container">
                     <Link className="nav-buttons" to={'/home'}>
                         <ion-icon name="home-outline"></ion-icon>
                     </Link>

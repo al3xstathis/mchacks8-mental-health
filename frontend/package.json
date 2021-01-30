@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
+    "framer-motion": "^3.2.2-rc.1",
     "ionicons": "^5.4.0",
     "node-sass": "^4.0.0",
     "react": "^17.0.1",
