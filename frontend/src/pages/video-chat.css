@@ -1,0 +1,28 @@
+.video-chat {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 100%;
+    height: 90vh;
+    width: 100%;
+}
+
+.video-feed {
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(12, 8.5%);
+    height: 100%;
+}
+
+.incoming-vid {
+    grid-row: 2/8;
+    grid-column: 3/8;
+    background-color: var(--blue-ish);
+    border-radius: 20px;
+}
+
+.selfie-vid {
+    grid-row: 9/12;
+    grid-column: 6/9;
+    background-color: var(--blue-ish);
+    border-radius: 20px;
+}
