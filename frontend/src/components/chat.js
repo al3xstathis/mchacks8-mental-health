@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+import {motion} from 'framer-motion';
 import './chat.css';
 
 const Chat = () => {
@@ -21,7 +22,7 @@ const Chat = () => {
     const scrollToBottom = () => {
         bottomRef.current.scrollIntoView({
             behavior: "smooth",
-            block: "start",
+            block: "center",
         });
     };
 
@@ -54,29 +55,42 @@ const Chat = () => {
 
     return (
         <>
-            <div className="chat-container">
+            <motion.div
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                className="chat-container">
                 <div className="chat-inner">
-                    <div className="chat-feed">
+                    <motion.div
+                        initial={{opacity: 0, y: 10}}
+                        animate={{opacity: 1, y: 0}}
+                        transition={{delay: 0.3}}
+                        className="chat-feed">
                         <div className="list-container">
                             {listOfMessages}
                             <div ref={bottomRef}></div>
                         </div>
-                    </div>
+                    </motion.div>
                     <form
                         onSubmit={handleSubmit}
                         className="chat-input-container">
-                        <input
+                        <motion.input
+                            initial={{opacity: 0, y: 10}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{delay: 0.8}}
                             type="text"
                             value={typingText}
                             onChange={e => setTypingText(e.target.value)}
-                            // onKeyPress={handleUserKeyPress}
                             placeholder="Type your message here:" className="chat-input-box"/>
-                        <button className="send-message">SEND</button>
+                        <motion.button
+                            initial={{opacity: 0, y: 10}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{delay: 0.8}}
+                            className="send-message">SEND</motion.button>
                     </form>
 
                 </div>
 
-            </div>
+            </motion.div>
         </>
     )
 }
