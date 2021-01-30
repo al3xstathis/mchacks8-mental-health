@@ -1,0 +1,32 @@
+.chat-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 80%;
+    width: 80%;
+    border-radius: 20px;
+    background-color: var(--light-red-ish);
+}
+
+.chat-feed {
+    height: 75%;
+    width: 85%;
+    background-color: var(--red-ish);
+    border-radius: 20px;
+}
+
+.chat-input {
+    height: 10%;
+    width: 85%;
+    background-color: var(--red-ish);
+    border-radius: 20px;
+}
