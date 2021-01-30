@@ -1,25 +1,44 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './registration.css';
-import Navbar from "../components/nav";
-import Select from 'react-select';
 
-
-const Registration = () => {
+const Registration = ({ history }) => {
     const [selectedOption, setSelectedOption] = useState(null);
+    const [username, setUsername] = useState("")
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [health, setHealth] = useState("");
 
 
     const options = [
-        {value: 'anxietyDisorders', label: 'Anxiety Disorders'},
-        {value: 'eatingDisorder', label: 'Eating Disorder'},
-        {value: 'ecw', label: 'Vanilla'},
-        {value: 'cqwvq', label: 'Caon'},
-        {value: 'cfqw', label: 'Vaanciwa'},
-        {value: 'dqwcw', label: 'Vancniwa'},
+        { value: 'anxietyDisorders', label: 'Anxiety Disorders' },
+        { value: 'eatingDisorder', label: 'Eating Disorder' },
+        { value: 'ecw', label: 'Vanilla' },
+        { value: 'cqwvq', label: 'Caon' },
+        { value: 'cfqw', label: 'Vaanciwa' },
+        { value: 'dqwcw', label: 'Vancniwa' },
     ];
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+    const handleSignUp = async () => {
+        try {
+            await app
+                .auth()
+                .createUserWithEmailAndPassword(email, password);
+            history.push("/home");
+        } catch (error) {
+            alert(error);
+        }
+    }
 
     return (
         <>
-            <Navbar/>
+            <Navbar />
 
             <div className="registration-container">
                 <div className="sign-up-in">
@@ -28,24 +47,24 @@ const Registration = () => {
                     </div>
                     <div className="username">
                         <p className="input-description">Enter a username: </p>
-                        <input className="reg-input" placeholder="Type a username here:"/>
+                        <input className="reg-input" placeholder="Type a username here:" onChange={handleUsernameChange} />
                     </div>
                     <div className="email">
                         <p className="input-description">Enter your email: </p>
-                        <input className="reg-input" placeholder="Type your email here:"/>
+                        <input className="reg-input" placeholder="Type your email here:" onChange={handleEmailChange} />
                     </div>
                     <div className="name">
                         <p className="input-description">Enter your name: </p>
-                        <input className="reg-input" placeholder="Type your name here:"/>
+                        <input className="reg-input" placeholder="Type your name here:" onChange={handleNameChange} />
                     </div>
                     <div className="password">
                         <p className="input-description">Enter a password: </p>
-                        <input className="reg-input" placeholder="Type your password here:"/>
+                        <input type="password" className="reg-input" placeholder="Type your password here:" onChange={handlePasswordChange} />
                     </div>
-                    <div className="mental-health-selector">
+                    <div className="mental-health-selector" onChange={handleHealthChange}>
                         <p className="long-part">Select which mental health issues you
-                            identify with so we can match you with others with things
-                            in common:
+                        identify with so we can match you with others with things
+                        in common:
                         </p>
                         <Select
                             className="mental-select"
@@ -65,10 +84,8 @@ const Registration = () => {
 
                     </div>
                     <div className="sign-up-submit">
-                        <button className="sign-up-button">SIGN UP</button>
+                        <button className="sign-up-button" onClick={handleSignUp}>SIGN UP</button>
                     </div>
-
-
                 </div>
                 <div className="info">
                     <div className="title-sign-up">
@@ -79,7 +96,7 @@ const Registration = () => {
                             Mental Health Chat is a place for people suffering from mental Health Issues
                             to meet and talk to people suffering from similar problems.
                         </p>
-                        <br/>
+                        <br />
                         <p className="description-p">
                             It’s a place to discuss and listen to another
                             person’s experiences and points of views.
@@ -91,4 +108,4 @@ const Registration = () => {
     )
 }
 
-export default Registration;
+export default withRouter(Registration);
