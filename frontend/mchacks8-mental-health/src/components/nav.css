@@ -1,0 +1,12 @@
+.navbar {
+    height: 75px;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-title Link {
+    text-decoration: none;
+}
