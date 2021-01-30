@@ -21,4 +21,5 @@
     max-width: 50%;
     text-align: center;
     justify-content: center;
+    min-width: 300px;
 }

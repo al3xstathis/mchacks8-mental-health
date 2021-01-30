@@ -22,19 +22,23 @@
     color: var(--red-ish);
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 500px) {
     .nav-link {
         font-size: 16px;
     }
     .nav-buttons {
         font-size: 20px;
         width: 25px;
+        margin: 10px;
+    }
+    .nav-link {
+        margin: 20px;
     }
     .navbar {
 
     }
     .nav-buttons-container {
-        width: 100px;
+        width: auto;
         display: flex;
         justify-content: space-around;
     }
