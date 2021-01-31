@@ -3,6 +3,8 @@ import './registration.css';
 import Navbar from "../components/nav";
 import Select from 'react-select';
 import { motion } from "framer-motion";
+import { withRouter } from "react-router";
+import app from "../firebase";
 
 const Registration = ({ history }) => {
     const [selectedOption, setSelectedOption] = useState(null);
@@ -10,7 +12,6 @@ const Registration = ({ history }) => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [health, setHealth] = useState("");
     const [signUp, setSignUp] = useState(true);
 
     const options = [
@@ -24,12 +25,19 @@ const Registration = ({ history }) => {
         { value: 'other', label: 'Other' },
     ];
 
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+    };
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+    };
+
     const handleSignUp = async () => {
         try {
             await app
@@ -57,19 +65,19 @@ const Registration = ({ history }) => {
                             </div>
                             <div className="username">
                                 <p className="input-description">Enter a username: </p>
-                                <input className="reg-input" placeholder="Type a username here:" />
+                                <input className="reg-input" placeholder="Type a username here:" onChange={handleUsernameChange} />
                             </div>
                             <div className="email">
                                 <p className="input-description">Enter your email: </p>
-                                <input className="reg-input" placeholder="Type your email here:" />
+                                <input className="reg-input" placeholder="Type your email here:" onChange={handleEmailChange} />
                             </div>
                             <div className="name">
                                 <p className="input-description">Enter your name: </p>
-                                <input className="reg-input" placeholder="Type your name here:" />
+                                <input className="reg-input" placeholder="Type your name here:" onChange={handleNameChange} />
                             </div>
                             <div className="password">
                                 <p className="input-description">Enter a password: </p>
-                                <input className="reg-input" placeholder="Type your password here:" />
+                                <input type="password" className="reg-input" placeholder="Type your password here:" onChange={handlePasswordChange} />
                             </div>
                             <div className="mental-health-selector">
                                 <p className="long-part">Select which mental health issues you
@@ -94,7 +102,7 @@ const Registration = ({ history }) => {
 
                             </div>
                             <div className="sign-up-submit">
-                                <button className="sign-up-button">SIGN UP</button>
+                                <button className="sign-up-button" onClick={handleSignUp}>SIGN UP</button>
                             </div>
                             <div className="change-sign">
                                 <p>Already have an account?</p>
