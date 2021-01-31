@@ -1,13 +1,11 @@
 import React from 'react';
 import './video-chat.css';
-import Navbar from "../components/nav";
 import Chat from "../components/chat";
 import {motion} from 'framer-motion'
 
 const Video = () => {
     return (
         <>
-            <Navbar/>
             <div className="video-chat">
                 <div className="video-feed">
                     <motion.div
@@ -15,6 +13,7 @@ const Video = () => {
                         animate={{opacity: 1,x: 0}}
                         transition={{duration:0.5}}
                         className="incoming-vid">
+                        <video autoPlay className="remote-video" id="remote-video"></video>
 
                     </motion.div>
                     <motion.div
@@ -22,7 +21,7 @@ const Video = () => {
                         animate={{opacity: 1,x: 0}}
                         transition={{duration:0.5}}
                         className="selfie-vid">
-
+                        <video autoPlay muted className="local-video" id="local-video"></video>
                     </motion.div>
                 </div>
                 <div className="chat-game-feed">
