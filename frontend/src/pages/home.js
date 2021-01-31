@@ -1,13 +1,13 @@
 import React, { useEffect, useContext } from 'react';
 import Navbar from "../components/nav";
-import {handleIncomingMessage} from '../scripts/websocket';
+import { handleIncomingMessage } from '../scripts/websocket';
 import Loading from "../components/loading";
 import './home.css'
 import { motion } from "framer-motion";
 import { AuthContext } from "../Auth";
 
 const Home = () => {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, userData } = useContext(AuthContext);
     useEffect(() => {
         let protocol = "ws";
         if (document.location.protocol === "https:") {
@@ -23,8 +23,8 @@ const Home = () => {
             console.log('Connection closed.');
         }
 
-        const uid = ""+Math.random*10000
-        
+        const uid = "" + Math.random * 10000
+
         ws.onopen = () => {
             console.log('Connected!');
             ws.send(JSON.stringify({
