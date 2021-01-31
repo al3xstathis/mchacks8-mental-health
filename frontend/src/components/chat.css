@@ -15,6 +15,7 @@
     width: 80%;
     border-radius: 20px;
     background-color: var(--light-red-ish);
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
 }
 
 .chat-feed {
@@ -25,6 +26,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
 }
 
 .chat-input-container {
@@ -39,17 +41,19 @@
     width: 20%;
     height: 100%;
     border-radius: 20px;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
 }
 
 .chat-input-box {
     height: 100%;
     width: 70%;
     border-radius: 20px;
-    padding: 5px;
+    padding: 8px;
     border: none;
     background-color: var(--red-ish);
     margin: 5px;
     color: #420101;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
 }
 
 .chat-input-box::placeholder {
@@ -89,6 +93,7 @@ ul, li {
     max-width: 75%;
     width: max-content;
     padding: 5px;
+    /*box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);*/
 }
 
 .chat-outgoing {
@@ -105,6 +110,7 @@ ul, li {
     border-radius: 15px;
     background-color: white;
     opacity: 80%;
+    /*box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);*/
 }
 
 .chat-incoming {
@@ -122,7 +128,3 @@ ul, li {
     overflow-y: auto;
 }
 
-#chat:last-child {
-    position: sticky;
-    bottom: 0;
-}
