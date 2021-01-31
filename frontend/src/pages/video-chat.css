@@ -15,14 +15,45 @@
 
 .incoming-vid {
     grid-row: 2/8;
-    grid-column: 3/8;
+    grid-column: 3/9;
     background-color: var(--blue-ish);
     border-radius: 20px;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
 }
 
 .selfie-vid {
     grid-row: 9/12;
-    grid-column: 6/9;
+    grid-column: 7/10;
     background-color: var(--blue-ish);
     border-radius: 20px;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
+}
+
+.text-popup {
+    background-color: var(--blue-ish);
+    grid-row: 10/12;
+    grid-column: 2 /5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
+
+}
+
+.ice-breaker {
+    font-size: 14px;
+    margin: 15px;
+    text-align: center;
+
+}
+
+.shuffle {
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
 }

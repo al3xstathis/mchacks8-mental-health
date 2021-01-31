@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import app from "./firebase.js";
+import Loading from "./components/loading";
 
 export const AuthContext = React.createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [pending, setPending] = useState(true);
 
@@ -15,7 +16,11 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     if (pending) {
-        return <>Loading...</>
+        return (
+            <div className="wait-for-firebase">
+                <Loading/>
+            </div>
+        )
     }
 
     return (

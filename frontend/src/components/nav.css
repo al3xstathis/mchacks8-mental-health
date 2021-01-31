@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.08);
 }
 
 .nav-buttons {
