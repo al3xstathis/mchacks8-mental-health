@@ -31,7 +31,7 @@
 
 .text-popup {
     background-color: var(--blue-ish);
-    grid-row: 9/12;
+    grid-row: 10/12;
     grid-column: 2 /5;
     display: flex;
     flex-direction: column;
@@ -44,7 +44,8 @@
 
 .ice-breaker {
     font-size: 14px;
-    margin: 10px;
+    margin: 15px;
+    text-align: center;
 
 }
 
