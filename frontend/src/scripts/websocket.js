@@ -1,42 +1,20 @@
-export function connect(userData, enqueue = false){
-    let protocol = "ws";
+const {RTCPeerConnection, RTCSessionDescription} = window;
 
-    if (document.location.protocol === "https:") {
-        protocol += "s";
-    }
-
-    const ws = new WebSocket(protocol + "://localhost:3030/ws");
-
-    ws.onerror = (evt) => {
-        console.error(evt);
-    }
-    
-    ws.onopen = () => {
-        console.log('Connected!');
-
-        if (enqueue) {
-            ws.send(JSON.stringify({
-                type: 'enqueue',
-                user: userData,
-                payload: 'blc',
-                target: 'someone else'
-            }));
-        }
-    };
-
-    ws.onmessage = (evt) => {
-        handleIncomingMessage(JSON.parse(evt.data));
-    }
-
-    ws.onclose = () => {
-        console.log('Connection closed.');
-    }
-}
-
-function handleIncomingMessage(msg){
+export function handleIncomingMessage(ws, msg){
+    console.log(msg)
     switch (msg.type) {
+        case "matchFoundAndCall":
+            callUser(ws, msg);
+            // set the matching keywords here
+            break;
+        
         case "matchFound":
             console.log(msg.user.uid);
+            // set the matching keywords
+            break;
+        
+        case "callOffer":
+            console.log(JSON.parse(msg.payload))
             break;
     
         case "newMessage":
@@ -46,4 +24,21 @@ function handleIncomingMessage(msg){
         default:
             break;
     }
+}
+
+async function callUser(ws, msg){
+    const peerConnection = new RTCPeerConnection();
+    const offer = await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(offer);
+
+    ws.send(JSON.stringify({
+        type: "callOffer",
+        target: "12345kajshd", //TODO un-hardcode
+        payload: JSON.stringify(offer),
+        user: {
+            uid: "12345kajshd",
+            username: "nic",
+            keywords: ["riperoni", "jabronis", "lorem"]
+        }
+    }))
 }

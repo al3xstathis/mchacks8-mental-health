@@ -96,6 +96,21 @@ func handleIncomingMessages() {
 				userQueue = append(userQueue, msg.User)
 			}
 
+		case "callOffer":
+			callOffer(msg)
+		}
+	}
+}
+
+func callOffer(msg message) {
+	fmt.Printf("CALL OFFER!%v", msg)
+	for ws := range clients {
+		if clients[ws].UID == msg.Target {
+			ws.ReadJSON(message{
+				Type:    "callOffer",
+				User:    msg.User,
+				Payload: msg.Payload,
+			})
 		}
 	}
 }
@@ -104,8 +119,13 @@ func notifyMatches(user1 userStruct, user2 userStruct, keywords []string) {
 	for ws := range clients {
 		if clients[ws].UID == user2.UID {
 			ws.WriteJSON(message{
-				Type: "matchFound",
+				Type: "matchFoundAndCall",
 				User: user1,
+			})
+		} else if clients[ws].UID == user1.UID {
+			ws.WriteJSON(message{
+				Type: "matchFound",
+				User: user2,
 			})
 		}
 	}

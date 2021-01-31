@@ -1,17 +1,45 @@
 import React, {useEffect} from 'react';
 import Navbar from "../components/nav";
-import {connect} from '../scripts/websocket';
+import {handleIncomingMessage} from '../scripts/websocket';
 import Loading from "../components/loading";
 import './home.css'
 import {motion} from "framer-motion";
 
 const Home = () => {
     useEffect(() => {
-        connect({
-            uid: '123456',
-            username: 'Nicolas',
-            keywords: ['riperoni', 'jabronis', 'lorem', 'ipsum']
-        }, true);
+        let protocol = "ws";
+        if (document.location.protocol === "https:") {
+            protocol += "s";
+        }
+
+        const ws = new WebSocket(protocol + "://localhost:3030/ws");
+
+        ws.onerror = (evt) => {
+            console.error(evt);
+        }
+        ws.onclose = () => {
+            console.log('Connection closed.');
+        }
+
+        const uid = ""+Math.random*10000
+        
+        ws.onopen = () => {
+            console.log('Connected!');
+            ws.send(JSON.stringify({
+                type: 'enqueue',
+                user: {
+                    uid,
+                    username: "nic",
+                    keywords: ["riperoni", "jabronis", "lorem"]
+                },
+                payload: 'blc',
+                target: 'someone else'
+            }));
+        };
+
+        ws.onmessage = (evt) => {
+            handleIncomingMessage(ws, JSON.parse(evt.data));
+        }
     });
 
     return (
