@@ -1,24 +1,31 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import app from "./firebase.js";
 import Loading from "./components/loading";
 
 export const AuthContext = React.createContext();
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [pending, setPending] = useState(true);
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        app.auth().onAuthStateChanged((user) => {
-            setCurrentUser(user)
-            setPending(false)
+        app.app.auth().onAuthStateChanged(async (user) => {
+            if (user && user.email) {
+                const doc = app.fetchData(user.email);
+                if (doc) {
+                    setUserData(doc)
+                }
+            }
+            setCurrentUser(user);
+            setPending(false);
         });
     }, []);
 
     if (pending) {
         return (
             <div className="wait-for-firebase">
-                <Loading/>
+                <Loading />
             </div>
         )
     }
@@ -26,7 +33,9 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider
             value={{
-                currentUser
+                currentUser,
+                userData,
+                setUserData
             }}
         >
             {children}

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Navbar from "../components/nav";
-import {handleIncomingMessage} from '../scripts/websocket';
+import { handleIncomingMessage } from '../scripts/websocket';
 import Loading from "../components/loading";
 import './home.css'
 import { motion } from "framer-motion";
@@ -8,11 +8,11 @@ import { AuthContext } from "../Auth";
 import Video from "./video-chat";
 
 const Home = () => {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, userData } = useContext(AuthContext);
     const [showVideo, setShowVideo] = useState(false);
 
     useEffect(() => {
-        if (!currentUser){
+        if (!currentUser) {
             return;
         }
 
@@ -35,7 +35,7 @@ const Home = () => {
             window.targetUser = false;
             console.log('Connection closed.');
         }
-        
+
         ws.onopen = () => {
             console.log('Connected!');
             ws.send(JSON.stringify({
@@ -52,24 +52,24 @@ const Home = () => {
             handleIncomingMessage(ws, JSON.parse(evt.data), currentUser, setShowVideo);
         }
 
-        return () => {ws.close();}
+        return () => { ws.close(); }
     }, [currentUser]);
 
     return (
         <>
             <Navbar />
-            {showVideo ? <Video/> :
-            <div className="home-screen">
-                <Loading />
-                <div className="home-text">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        className="home-h2">Based on the categories you chose when creating an account,<br />
+            {showVideo ? <Video /> :
+                <div className="home-screen">
+                    <Loading />
+                    <div className="home-text">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                            className="home-h2">Based on the categories you chose when creating an account,<br />
                         we are matching you with someone who chose similar categories</motion.h2>
-                </div>
-            </div>}
+                    </div>
+                </div>}
         </>
     )
 }

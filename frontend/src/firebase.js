@@ -11,5 +11,24 @@ const app = firebase.initializeApp({
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 })
+const db = app.firestore()
 
-export default app
+async function fetchData(email) {
+    await db.collection("userData").where("email", "==", email)
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                if (!doc) {
+                    return null;
+                }
+                // doc.data() is never undefined for query doc snapshots
+                return doc.data()
+            });
+        })
+        .catch(function (error) {
+            console.log("Error getting documents: ", error);
+            return null;
+        });
+}
+
+export default { app, db, fetchData }

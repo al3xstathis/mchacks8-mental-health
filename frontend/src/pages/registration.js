@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './registration.css';
 import Navbar from "../components/nav";
 import Select from 'react-select';
 import { motion } from "framer-motion";
 import { withRouter } from "react-router";
 import app from "../firebase";
+import { AuthContext } from "../Auth";
 
 const Registration = ({ history }) => {
+
+    const { userData, setUserData } = useContext(AuthContext);
+
     const [selectedOption, setSelectedOption] = useState(null);
     const [username, setUsername] = useState("")
     const [name, setName] = useState("")
@@ -52,12 +56,28 @@ const Registration = ({ history }) => {
             return;
         }
         try {
-            await app
+            await app.app
                 .auth()
                 .createUserWithEmailAndPassword(email, password);
+            const db = app.db;
+            await db.collection("userData").add({
+                email: email,
+                username: username,
+                name: name,
+                health: selectedOption.map(element => element.value)
+            }).then(() => {
+                setUserData({
+                    email: email,
+                    username: username,
+                    name: name,
+                    health: selectedOption.map(element => element.value)
+                })
+            });
             history.push("/home");
+
         } catch (error) {
             alert(error);
+            console.error(error)
         }
     }
 
@@ -67,12 +87,13 @@ const Registration = ({ history }) => {
             return;
         }
         try {
-            await app
+            await app.app
                 .auth()
                 .signInWithEmailAndPassword(emailSignIn, passwordSignIn);
             history.push("/home");
         } catch (error) {
             alert(error);
+            console.error(error)
         }
     }
 
@@ -153,7 +174,7 @@ const Registration = ({ history }) => {
                                 <input type="password" className="reg-input" placeholder="Type your password here:" onChange={handlePasswordSignInChange} />
                             </div>
                             <div className="sign-up-submit">
-                                <button className="sign-up-button" onClick={handleSignIn}>SIGN UP</button>
+                                <button className="sign-up-button" onClick={handleSignIn}>SIGN IN</button>
                             </div>
                             <div className="change-sign">
                                 <p>Don't have an account?</p>
