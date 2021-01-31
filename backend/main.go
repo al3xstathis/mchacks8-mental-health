@@ -67,8 +67,11 @@ func decodeAndPassMessage(ws *websocket.Conn) {
 		var msg message
 		err := ws.ReadJSON(&msg)
 		if err != nil {
-			log.Printf("JSON read error: %v\n", err)
-			break
+			log.Printf("JSON read error: msg type: %v error: %v\n", msg, err)
+		}
+
+		if msg.Type == "" {
+			continue
 		}
 
 		if msg.Type == "enqueue" {
@@ -82,14 +85,9 @@ func decodeAndPassMessage(ws *websocket.Conn) {
 func handleIncomingMessages() {
 	for {
 		msg := <-msgQueue
-
-		fmt.Printf("Message: %v\n", msg)
-
 		switch msg.Type {
 		case "enqueue":
 			clients[msg.User.WS] = msg.User
-
-			fmt.Printf("\ncurrent state %v", clients)
 			matchFound, matchedUser, keywords := searchForMatch(msg.User)
 
 			if matchFound {
@@ -102,6 +100,49 @@ func handleIncomingMessages() {
 
 		case "callOffer":
 			callOffer(msg)
+
+		case "callAccepted":
+			callAccepted(msg)
+
+		case "iceEvent":
+			iceEvent(msg)
+
+		case "negotiate":
+			negotiate(msg)
+		}
+	}
+}
+
+func negotiate(msg message) {
+	for ws := range clients {
+		if clients[ws].UID == msg.Target {
+			ws.WriteJSON(message{
+				Type:    "negotiate",
+				Payload: msg.Payload,
+			})
+		}
+	}
+}
+
+func iceEvent(msg message) {
+	for ws := range clients {
+		if clients[ws].UID == msg.Target {
+			ws.WriteJSON(message{
+				Type:    "iceEvent",
+				Payload: msg.Payload,
+			})
+		}
+	}
+}
+
+func callAccepted(msg message) {
+	for ws := range clients {
+		if clients[ws].UID == msg.Target {
+			ws.WriteJSON(message{
+				Type:    "callAccepted",
+				User:    msg.User,
+				Payload: msg.Payload,
+			})
 		}
 	}
 }

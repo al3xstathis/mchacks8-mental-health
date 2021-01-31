@@ -25,10 +25,14 @@ const Home = () => {
 
         ws.onerror = (evt) => {
             setShowVideo(false);
+            window.peerConnection = false;
+            window.targetUser = false;
             console.error(evt);
         }
         ws.onclose = () => {
             setShowVideo(false);
+            window.peerConnection = false;
+            window.targetUser = false;
             console.log('Connection closed.');
         }
         
