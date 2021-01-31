@@ -52,7 +52,10 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			log.Fatal("WebSocket upgrader error\n", err)
 		}
 	}
-	defer ws.Close()
+	defer func() {
+		ws.Close()
+		delete(clients, ws)
+	}()
 
 	clients[ws] = userStruct{}
 
@@ -86,6 +89,7 @@ func handleIncomingMessages() {
 		case "enqueue":
 			clients[msg.User.WS] = msg.User
 
+			fmt.Printf("\ncurrent state %v", clients)
 			matchFound, matchedUser, keywords := searchForMatch(msg.User)
 
 			if matchFound {
@@ -103,10 +107,9 @@ func handleIncomingMessages() {
 }
 
 func callOffer(msg message) {
-	fmt.Printf("CALL OFFER!%v", msg)
 	for ws := range clients {
 		if clients[ws].UID == msg.Target {
-			ws.ReadJSON(message{
+			ws.WriteJSON(message{
 				Type:    "callOffer",
 				User:    msg.User,
 				Payload: msg.Payload,

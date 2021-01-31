@@ -23,7 +23,11 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     if (pending) {
-        return <Loading />
+        return (
+            <div className="wait-for-firebase">
+                <Loading />
+            </div>
+        )
     }
 
     return (
