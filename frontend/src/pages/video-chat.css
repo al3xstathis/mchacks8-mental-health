@@ -16,17 +16,28 @@
 .incoming-vid {
     grid-row: 2/8;
     grid-column: 3/9;
-    background-color: var(--blue-ish);
+    /*background-color: var(--blue-ish);*/
     border-radius: 20px;
-    box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .selfie-vid {
     grid-row: 9/12;
     grid-column: 7/10;
-    background-color: var(--blue-ish);
+    /*background-color: var(--blue-ish);*/
     border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.local-video, .remote-video {
+    width: 90%;
     box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
+    border-radius: 20px;
 }
 
 .text-popup {
@@ -57,3 +68,4 @@
     background-color: white;
     box-shadow: 6px 7px 32px 9px rgba(0, 0, 0, 0.10);
 }
+
