@@ -21,7 +21,7 @@ const Landing = () => {
                         animate={{opacity: 1}}
                         transition={{delay: 0.4, duration: 0.5}}
                         className="landing-text-h2">
-                        Mental Health Chat was created for individuals who feel alone <br/>
+                        Alone Together was created for individuals who feel alone <br/>
                         to connect with someone who might be feeling the exact same way.<br/><br/>
                         Mental health issues are very common in our society, <br/>
                         but they don't get talked about enough.<br/><br/>

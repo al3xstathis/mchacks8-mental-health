@@ -98,17 +98,32 @@ func handleIncomingMessages() {
 				userQueue = append(userQueue, msg.User)
 			}
 
-		case "callOffer":
-			callOffer(msg)
+		// case "callOffer":
+		// 	callOffer(msg)
 
-		case "callAccepted":
-			callAccepted(msg)
+		// case "callAccepted":
+		// 	callAccepted(msg)
 
-		case "iceEvent":
-			iceEvent(msg)
+		// case "iceEvent":
+		// 	iceEvent(msg)
 
-		case "negotiate":
-			negotiate(msg)
+		// case "negotiate":
+		// 	negotiate(msg)
+
+		case "sendMessage":
+			sendMessage(msg)
+		}
+	}
+}
+
+func sendMessage(msg message) {
+	for ws := range clients {
+		if clients[ws].UID == msg.Target {
+			ws.WriteJSON(message{
+				Type:    "message",
+				Payload: msg.Payload,
+				User:    msg.User,
+			})
 		}
 	}
 }

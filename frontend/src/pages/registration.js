@@ -194,11 +194,11 @@ const Registration = ({ history }) => {
                     transition={{ delay: 1 }}
                     className="info">
                     <div className="title-sign-up">
-                        <h3 className="title-h3">What is Mental Health Chat?</h3>
+                        <h3 className="title-h3">What is Alone Together?</h3>
                     </div>
                     <div className="description-box">
                         <p className="description-p">
-                            Mental Health Chat is a place for people suffering from mental Health Issues
+                        Alone Together is a place for people suffering from mental Health Issues
                             to meet and talk to people suffering from similar problems.
                         </p>
                         <br />

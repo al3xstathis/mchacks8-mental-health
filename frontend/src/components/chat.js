@@ -2,20 +2,8 @@ import React, {useRef, useState} from 'react';
 import {motion} from 'framer-motion';
 import './chat.css';
 
-const Chat = () => {
+const Chat = (props) => {
     const [typingText, setTypingText] = useState("");
-    const [chatArray, setChatArray] = useState(
-        [
-            {
-                message: "Send a message to start the conversation...",
-                incoming: true
-            },
-            {
-                message: "Ask a question...",
-                incoming: false
-            }
-        ]
-    );
 
     const bottomRef = useRef();
 
@@ -31,21 +19,26 @@ const Chat = () => {
         const typedText = typingText.toString()
 
         if(typedText!=="") {
-            setChatArray(
-                chatArray.concat({
-                    message: typedText,
-                    incoming: false
-                }));
+            props.messages.push({
+                message: typedText,
+                incoming: false
+            });
+
+            window.sessionws.send({
+                type: "sendMessage",
+                target: window.targetUser,
+                payload: typedText,
+            });
 
             setTypingText("");
             scrollToBottom();
         }
     };
 
-    const listOfMessages = chatArray.map((message, index) =>
+    const listOfMessages = props.messages.map((message, index) =>
         <div key={index} className={message.incoming ? "chat-item-flex-left" : "chat-item-flex-right"}>
             {/*Todo replace with actual sender and receiver usernames**/}
-            <p className="sender-receiver">{message.incoming ? "Incoming" : "Outgoing"}</p>
+            <p className="sender-receiver">{message.incoming ? props.them : props.me}</p>
             <div className={message.incoming ? "chat-incoming" : "chat-outgoing"}>
                 {message.message}
             </div>
@@ -96,7 +89,7 @@ const Chat = () => {
     )
 }
 const ChatFeed = (props) => {
-    const messages = props.chatArray;
+    const messages = props.messages;
     const bottomRef = useRef();
 
     const scrollToBottom = () => {

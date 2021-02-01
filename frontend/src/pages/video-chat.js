@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import './video-chat.css';
 import Chat from "../components/chat";
 import {motion} from 'framer-motion'
-import Navbar from "../components/nav";
 
-const Video = () => {
+const Video = (props) => {
     const [iceBreaker, setIceBreaker] = useState("Click this button to shuffle through a list of questions you could ask!");
 
     const shuffleCards = () => {
@@ -61,7 +60,7 @@ const Video = () => {
 
                 </div>
                 <div className="chat-game-feed">
-                    <Chat/>
+                    <Chat messages={props.messages} me={props.me} them={props.them}/>
                 </div>
             </div>
         </>

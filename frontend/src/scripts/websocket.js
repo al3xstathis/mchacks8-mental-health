@@ -1,21 +1,26 @@
 const {RTCPeerConnection, RTCSessionDescription} = window;
 
-export function handleIncomingMessage(ws, msg, currentUser, setShowVideo){
+export function handleIncomingMessage(ws, msg, currentUser, setShowVideo, userData){
+    console.log(userData)
     switch (msg.type) {
         case "matchFoundAndCall":
             window.targetUser = msg.user.uid;
+            window.targetUsername = msg.user.username;
             window.peerConnection = null;
             window.sessionws = ws;
             window.currentUser = currentUser;
+            window.userData = userData;
             callUser(ws, msg, currentUser, setShowVideo);
             // set the matching keywords here
             break;
         
         case "matchFound":
             window.targetUser = msg.user.uid;
+            window.targetUsername = msg.user.username;
             window.peerConnection = null;
             window.sessionws = ws;
             window.currentUser = currentUser;
+            window.userData = userData;
             // set the matching keywords
             break;
         
@@ -36,11 +41,22 @@ export function handleIncomingMessage(ws, msg, currentUser, setShowVideo){
             break;
     
         case "newMessage":
+            receiveMessage(msg);
             break;
 
         default:
             break;
     }
+}
+
+function receiveMessage(msg){
+    if (!window.messaging){
+        window.messaging = [];
+    }
+    window.messaging.push({
+        incoming: msg.user.uid === window.currentUser.uid,
+        message: msg.payload
+    })
 }
 
 async function receiveNegotiation(msg){
@@ -55,8 +71,8 @@ async function receiveNegotiation(msg){
         payload: JSON.stringify(window.peerConnection.localDescription),
         user: {
             uid: window.currentUser.uid,
-            username: "nic",
-            keywords: ["riperoni", "jabronis", "lorem"]
+            username: window.userData.username,
+            keywords: window.userData.health
         }
     }));
 }
@@ -98,8 +114,8 @@ async function handleNegotiationNeeded(ev){
         payload: JSON.stringify(window.peerConnection.localDescription),
         user: {
             uid: window.currentUser.uid,
-            username: "nic",
-            keywords: ["riperoni", "jabronis", "lorem"]
+            username: window.userData.username,
+            keywords: window.userData.health
         }
     });
 }
@@ -118,8 +134,8 @@ async function acknowledgeCall(ws, msg, currentUser, setShowVideo){
         payload: JSON.stringify(window.peerConnection.localDescription),
         user: {
             uid: currentUser.uid,
-            username: "nic",
-            keywords: ["riperoni", "jabronis", "lorem"]
+            username: window.userData.username,
+            keywords: window.userData.health
         }
     }));
 }
@@ -138,8 +154,8 @@ async function callUser(ws, msg, currentUser, setShowVideo){
         payload: JSON.stringify(window.peerConnection.localDescription),
         user: {
             uid: currentUser.uid,
-            username: "nic",
-            keywords: ["riperoni", "jabronis", "lorem"]
+            username: window.userData.username,
+            keywords: window.userData.health
         }
     }));
 }
@@ -187,6 +203,7 @@ async function activateUserVideoAudio(setShowVideo){
     }).then((localStream) => {
         //while(!document.getElementById("local-video")){}
         document.getElementById("local-video").srcObject = localStream;
+        document.getElementById("remote-video").srcObject = localStream;
         localStream.getTracks().forEach(track => window.peerConnection.addTrack(track, localStream));
     }).catch(handleGetUserMediaError);
 }

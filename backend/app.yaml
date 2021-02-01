@@ -1,0 +1,5 @@
+runtime: go1.15
+env: flex
+
+manual_scaling:
+  instances: 1

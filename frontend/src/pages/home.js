@@ -42,23 +42,23 @@ const Home = () => {
                 type: 'enqueue',
                 user: {
                     uid: currentUser.uid,
-                    username: "nic",
-                    keywords: ["riperoni", "jabronis", "lorem"]
+                    username: userData.username,
+                    keywords: userData.health
                 },
             }));
         };
 
         ws.onmessage = (evt) => {
-            handleIncomingMessage(ws, JSON.parse(evt.data), currentUser, setShowVideo);
+            handleIncomingMessage(ws, JSON.parse(evt.data), currentUser, setShowVideo, userData);
         }
 
         return () => { ws.close(); }
-    }, [currentUser]);
+    }, [userData]);
 
     return (
         <>
             <Navbar />
-            {showVideo ? <Video /> :
+            {showVideo ? <Video messages={window.messaging} me={userData.username} them={window.targetUsername} /> :
                 <div className="home-screen">
                     <Loading />
                     <div className="home-text">
